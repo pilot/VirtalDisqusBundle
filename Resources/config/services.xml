@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    
+    <parameters>
+        <parameter key="virtal_disqus.helper.class">Virtal\Bundle\DisqusBundle\Templating\Helper\DisqusHelper</parameter>
+        <parameter key="virtal_disqus.twig.class">Virtal\Bundle\DisqusBundle\Twig\Extension\DisqusExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="virtal_disqus.helper" class="%virtal_disqus.helper.class%">
+            <argument type="service" id="templating" />
+            <tag name="templating.helper" alias="disqus" />
+            <argument>%virtal_disqus.disqus_shortname%</argument>
+            <argument>%virtal_disqus.disqus_developer%</argument>
+        </service>
+
+        <service id="virtal_disqus.twig" class="%virtal_disqus.twig.class%">
+            <argument type="service" id="service_container" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>
